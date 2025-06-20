@@ -1,0 +1,9 @@
+crewai
+pandas
+requests
+numpy
+tabulate
+matplotlib
+seaborn
+scikit-learn
+streamlit
