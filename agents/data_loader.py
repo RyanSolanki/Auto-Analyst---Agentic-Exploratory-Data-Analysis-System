@@ -2,7 +2,7 @@ import pandas as pd
 from crewai import Agent, Task
 from models.ollama_wrapper import OllamaLLM
 
-class DataLoaderAgent(Agent):
+class DataLoader(Agent):
     def __init__(self, llm):
         super().__init__(
             name="Data Loader",
@@ -61,8 +61,8 @@ class DataLoaderAgent(Agent):
 
 
 # Example usage
-if __name__ == "__main__":
-    llm = OllamaLLM(model_name="llama3")
-    agent = DataLoaderAgent(llm)
-    description = agent.load_and_describe("data/employee_churn.csv")
-    print(description)
+# if __name__ == "__main__":
+#     llm = OllamaLLM(model_name="llama3")
+#     agent = DataLoader(llm)
+#     description = agent.load_and_describe("data/employee_churn.csv")
+#     print(description)
