@@ -1,22 +1,25 @@
 import pandas as pd
 from agents.data_loader import DataLoader
-# from agents.statistical_analyst import StatisticalAnalystAgent
-# from agents.insight_generator import InsightGeneratorAgent
-# from agents.report_writer import ReportWriterAgent
+from agents.stat_analyst import StatisticalAnalyst
+# from agents.insight_generator import InsightGenerator
+# from agents.report_writer import ReportWriter
 from models.ollama_wrapper import OllamaLLM
 
 def main(data_path: str):
+    # Read in data to pandas df
+    df = pd.read_csv(data_path)
+
     # Initialize your LLM wrapper (Ollama local LLM)
-    llm = OllamaLLM(model_name="llama3")
+    llm = OllamaLLM(model_name="mistral:latest")
 
     # Step 1: Load and validate data
     data_loader = DataLoader(llm=llm)
-    df = data_loader.load_and_describe(data_path)
+    data_description = data_loader.load_and_describe(df)
 
-    # # Step 2: Analyze data with Statistical Analyst
-    # analyst = StatisticalAnalyst(llm=llm)
-    # eda_summary = analyst.analyze(df)
-    # print("EDA Summary:\n", eda_summary)
+    # Step 2: Analyze data with Statistical Analyst
+    analyst = StatisticalAnalyst(llm=llm)
+    eda_summary = analyst.analyze(df)
+    print("EDA Summary:\n", eda_summary)
 
     # # Step 3: Generate insights based on EDA
     # insight_gen = InsightGenerator(llm=llm)
